@@ -1,0 +1,68 @@
+1. Membuat Database 
+	CREATE database myshop;
+
+2. Membuat Table didalam Database
+	CREATE table users(
+		id int NOT NULL AUTO_INCREMENT,
+		name varchar(255),
+		email varchar(255),
+		password varchar(255),
+		PRIMARY KEY (id)
+	);
+	
+	CREATE table items(
+		id int NOT NULL AUTO_INCREMENT,
+		name varchar(255),
+		description varchar(255),
+		price int,
+		stock int,
+		category_id int,
+		PRIMARY KEY (id),
+		FOREIGN KEY(category_id) REFERENCES categories(id)
+	
+	);
+
+	CREATE table categories(
+		id int NOT NULL AUTO_INCREMENT,
+		name varchar(255),
+		PRIMARY KEY (id)
+	);
+
+3. Memasukan data pada table
+	INSERT INTO users(name, email, password)
+	VALUES('John Doe','john@doe.com','john123'),
+	      ('Jane Doe','jane@doe.com','jenita123');
+
+	INSERT INTO categories(name)
+	VALUES('gadget'),
+	      ('cloth'),
+	      ('men'),
+	      ('women'),
+	      ('branded');
+
+	INSERT INTO items(name, description, price, stock, category_id)
+	VALUES('Sumsang b50','hape keren dari merek sumsang','4000000','100','1'),
+	      ('Uniklooh','baju keren dari brand ternama','500000','50','2'),
+	      ('IMHO Watch','jam tangan anak yang jujur banget','2000000','10','1');
+
+4. Mengambil data dari database
+	a. Mengambil data dari users
+		SELECT id, name , email 
+		FROM users;
+	
+	b. Mengambil data items
+		SELECT * FROM items
+		WHERE price > '1000000';
+		
+		SELECT * FROM items
+		WHERE name LIKE '%watch%';
+
+	c. Menampilkan data items join dengan kategori
+		SELECT items.*, categories.name
+		FROM items JOIN categories
+		ON items.category_id  = categories.id;
+
+5. Mengubah data dari database
+	UPDATE items 
+	SET price = '2500000'
+	WHERE name = 'Sumsang b50';
